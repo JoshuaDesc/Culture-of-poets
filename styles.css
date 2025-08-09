@@ -1,0 +1,1280 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    /* Prevent horizontal scrolling on mobile */
+    overflow-x: hidden;
+    /* Prevent vertical scrolling - page ends at banner */
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+/* iOS Safe Area Support */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+}
+
+/* Homepage Section */
+.homepage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('images/background.png') no-repeat center top;
+    background-size: 100% auto;
+    position: relative;
+}
+
+/* Main Logo */
+.main-logo {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    animation: fadeInLogo 1.5s ease-in-out forwards;
+}
+
+.main-logo img {
+    max-width: 90vw;
+    width: 1100px;
+    height: auto;
+    display: block;
+}
+
+@keyframes fadeInLogo {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeInYellow {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+
+/* Submit Button */
+.submit-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 20;
+    opacity: 0;
+    animation: fadeInYellow 1s ease-in-out 1.8s forwards;
+}
+
+.submit-button a {
+    display: inline-block;
+    width: 200px;
+    padding: 10px 15px;
+    border: 3px solid #FCFF00;
+    border-radius: 50px;
+    background: transparent;
+    color: #FCFF00;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: transform 0.3s ease;
+}
+
+.submit-button a:hover {
+    transform: scale(1.1);
+}
+
+/* Donate Button */
+.donate-button {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 20;
+    opacity: 0;
+    animation: fadeInYellow 1s ease-in-out 1.8s forwards;
+}
+
+.donate-button a {
+    display: inline-block;
+    width: 200px;
+    padding: 10px 15px;
+    border: 3px solid #FCFF00;
+    border-radius: 50px;
+    background: transparent;
+    color: #FCFF00;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: transform 0.3s ease;
+}
+
+.donate-button a:hover {
+    transform: scale(1.1);
+}
+
+/* Quotes Button */
+.quotes-button {
+    position: absolute;
+    top: 30px;
+    left: 29%;
+    transform: translateX(-50%);
+    z-index: 20;
+    opacity: 0;
+    animation: fadeInYellow 1s ease-in-out 1.8s forwards;
+}
+
+.quotes-button a {
+    display: flex;
+    width: 650px;
+    height: 55px;
+    border: 3px solid #FCFF00;
+    border-radius: 50px;
+    background: transparent;
+    color: #FCFF00;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.quotes-button a:hover {
+    transform: scale(1.1);
+}
+
+.quote-text {
+    color: #FCFF00;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding: 0 20px;
+    line-height: 1.3;
+}
+
+.quote-text.show {
+    opacity: 1;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Content */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay.show .modal-content {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal-essay {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close:hover {
+    transform: scale(1.2);
+}
+
+/* Instagram Button */
+.instagram-button {
+    position: absolute;
+    bottom: 90px;
+    right: 30px;
+    z-index: 20;
+    opacity: 0;
+    animation: fadeInYellow 1s ease-in-out 2.2s forwards;
+}
+
+.instagram-button a {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.instagram-button a:hover {
+    transform: scale(1.1);
+}
+
+.instagram-button img {
+    width: 60px;
+    height: auto;
+    display: block;
+}
+
+/* Project Credit */
+.project-credit {
+    position: absolute;
+    bottom: 90px;
+    left: 30px;
+    z-index: 20;
+    opacity: 0;
+    animation: fadeInYellow 1s ease-in-out 2.2s forwards;
+}
+
+.project-credit p {
+    color: #FCFF00;
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.4;
+    text-align: left;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* Animated Banner */
+.animated-banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.banner-content {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-left 20s linear infinite;
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 100;
+    line-height: 55px;
+    padding: 0 20px;
+    font-family: 'Carson', monospace;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    transform: scaleX(1.3);
+}
+
+.banner-content span {
+    margin-right: 50px;
+    font-family: 'Carson', monospace;
+}
+
+.banner-content span * {
+    font-size: 4rem;
+    vertical-align: middle;
+    line-height: 55px;
+    display: inline-block;
+    transform: translateY(-2px);
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Submissions Section */
+.submissions {
+    min-height: 80vh;
+    background: #1F54BF;
+    padding: 50px 0 50px 0;
+}
+
+.submissions-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 70vh;
+    gap: 40px;
+}
+
+/* Right Side - Text Area */
+.submission-textarea {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.poetry-textarea {
+    width: 100%;
+    height: 400px;
+    padding: 20px;
+    border: 3px solid #ff0000;
+    border-radius: 15px;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.poetry-textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.poetry-textarea:focus {
+    border-color: #cc0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+.poetry-textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Left Side - Instructions and Form */
+.submission-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    padding: 20px;
+}
+
+.instructions h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.instructions ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.instructions li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.instructions li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ffffff40;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #ffcc00;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Donate Section */
+.donate {
+    min-height: 80vh;
+    background: #2c3e50;
+    padding: 50px 0 50px 0;
+}
+
+.donate-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.donate-container h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.donate-container > p {
+    font-size: 1.3rem;
+    color: #bdc3c7;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.donate-content {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.donate-info {
+    flex: 1;
+    color: white;
+}
+
+.donate-info h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.donate-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.donate-info li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.donate-info li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #FCFF00;
+    font-weight: bold;
+}
+
+.donate-form {
+    flex: 1;
+    color: white;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.donate-form h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.donate-form p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #bdc3c7;
+}
+
+.donation-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.donation-amount {
+    padding: 12px 20px;
+    border: 2px solid #FCFF00;
+    border-radius: 25px;
+    background: transparent;
+    color: #FCFF00;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.donation-amount:hover {
+    background: #FCFF00;
+    color: #2c3e50;
+}
+
+.donate-submit {
+    width: 100%;
+    padding: 15px 30px;
+    border: 3px solid #FCFF00;
+    border-radius: 50px;
+    background: #FCFF00;
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.donate-submit:hover {
+    background: transparent;
+    color: #FCFF00;
+}
+
+/* Footer */
+.footer {
+    background: black;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer p {
+    color: #bdc3c7;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Responsive Design */
+
+
+
+/* Hide Poetry slide on smaller screens (mobile) */
+@media (max-width: 960px) {
+    .quotes-button {
+        display: none;
+    }
+}
+
+/* Mobile Phone Layout - Stretch to fit screen */
+@media (max-width: 768px) {
+    .homepage {
+        padding: 10px;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Main logo - stretch to fit phone width */
+    .main-logo {
+        top: 45%;
+    }
+    
+    .main-logo img {
+        width: 90vw;
+        max-width: none;
+    }
+    
+    /* Poetry slide is hidden on mobile - no need for positioning */
+    
+    /* Submit and Donate buttons - top row, smaller but clickable */
+    .submit-button {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .submit-button a {
+        width: 120px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+    
+    .donate-button {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .donate-button a {
+        width: 120px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+    
+    /* Instagram and Project - adjust for phone */
+    .instagram-button {
+        bottom: 70px;
+        right: 15px;
+    }
+    
+    .instagram-button img {
+        width: 40px;
+    }
+    
+    .project-credit {
+        bottom: 70px;
+        left: 15px;
+    }
+    
+    .project-credit p {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+    
+    /* Banner adjustments for mobile */
+    .banner-content {
+        font-size: 1.4rem;
+        transform: scaleX(1.0);
+    }
+    
+    .banner-content span * {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-logo img {
+        width: 80vw;
+    }
+    
+
+    
+    .submit-button {
+        top: 20px;
+        right: 20px;
+    }
+    
+    .submit-button a {
+        width: 150px;
+        font-size: 1rem;
+        padding: 8px 12px;
+        transition: transform 0.3s ease;
+    }
+    
+    .submit-button a:hover {
+        transform: scale(1.1);
+    }
+    
+    .donate-button {
+        top: 20px;
+        left: 20px;
+    }
+    
+    .donate-button a {
+        width: 150px;
+        font-size: 1rem;
+        padding: 8px 12px;
+        transition: transform 0.3s ease;
+    }
+    
+    .donate-button a:hover {
+        transform: scale(1.1);
+    }
+    
+    .quotes-button a {
+        width: 400px;
+        height: 50px;
+    }
+    
+    .quotes-button a:hover {
+        transform: scale(1.1);
+    }
+    
+    .quote-text {
+        font-size: 0.9rem;
+    }
+    
+    .instagram-button {
+        bottom: 90px;
+        right: 20px;
+    }
+    
+    .instagram-button img {
+        width: 50px;
+    }
+    
+    .project-credit {
+        bottom: 85px;
+        left: 20px;
+    }
+    
+    .project-credit p {
+        font-size: 1rem;
+        font-weight: 900;
+    }
+}
+
+@media (max-width: 768px) {
+    .homepage {
+        background-size: cover;
+        background-position: center;
+        padding: 10px;
+    }
+    
+    .main-logo {
+        top: 42%;
+    }
+    
+    .main-logo img {
+        width: 75vw;
+        max-width: 400px;
+    }
+    
+    /* Prevent button overlap on mobile */
+    .submit-button {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .submit-button a {
+        width: 110px;
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        letter-spacing: 1px;
+        transition: transform 0.3s ease;
+    }
+    
+    .donate-button {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .donate-button a {
+        width: 110px;
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        letter-spacing: 1px;
+        transition: transform 0.3s ease;
+    }
+    
+    /* Better quotes button positioning */
+    .quotes-button {
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .quotes-button a {
+        width: calc(100vw - 30px);
+        max-width: 350px;
+        height: 50px;
+        font-size: 0.8rem;
+    }
+    
+    .quote-text {
+        font-size: 0.8rem;
+        padding: 0 15px;
+    }
+    
+    .instagram-button {
+        bottom: 90px;
+        right: 15px;
+    }
+    
+    .instagram-button img {
+        width: 45px;
+    }
+    
+    .project-credit {
+        bottom: 85px;
+        left: 15px;
+    }
+    
+    .project-credit p {
+        font-size: 0.9rem;
+        font-weight: 900;
+        line-height: 1.2;
+    }
+    
+    .banner-content {
+        font-size: 1.6rem;
+        letter-spacing: 0px;
+        transform: scaleX(1.1);
+    }
+    
+    .banner-content span * {
+        font-size: 1.8rem;
+    }
+    
+    .submissions-container {
+        flex-direction: column;
+        gap: 25px;
+        height: auto;
+        padding: 15px;
+        max-width: 100%;
+    }
+    
+    .poetry-textarea {
+        height: 280px;
+        font-size: 1rem;
+    }
+    
+    .instructions h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .contact-info h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .form-group input {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Donation section improvements */
+    .donate-content {
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .donate-form {
+        padding: 20px;
+    }
+    
+    .donation-options {
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .donation-amount {
+        min-width: 60px;
+        font-size: 0.9rem;
+    }
+}
+
+/* iPhone and small mobile devices */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .homepage {
+        padding: 5px;
+        min-height: 100vh;
+        min-height: -webkit-fill-available; /* iOS Safari fix */
+    }
+    
+    .main-logo {
+        top: 38%;
+    }
+    
+    .main-logo img {
+        width: 90vw;
+        max-width: 320px;
+    }
+    
+    /* Compact buttons for small screens */
+    .submit-button {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .submit-button a {
+        width: 90px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
+        letter-spacing: 1px;
+        transition: transform 0.3s ease;
+    }
+    
+    .donate-button {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .donate-button a {
+        width: 90px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
+        letter-spacing: 1px;
+        transition: transform 0.3s ease;
+    }
+    
+    /* Quotes button positioned to avoid overlap */
+    .quotes-button {
+        top: 65px;
+    }
+    
+    .quotes-button a {
+        width: calc(100vw - 20px);
+        max-width: 300px;
+        height: 45px;
+        font-size: 0.7rem;
+    }
+    
+    .quote-text {
+        font-size: 0.7rem;
+        padding: 0 10px;
+        line-height: 1.2;
+    }
+    
+    .instagram-button {
+        bottom: 90px;
+        right: 10px;
+    }
+    
+    .instagram-button img {
+        width: 35px;
+    }
+    
+    .project-credit {
+        bottom: 85px;
+        left: 10px;
+    }
+    
+    .project-credit p {
+        font-size: 0.75rem;
+        font-weight: 900;
+        line-height: 1.1;
+    }
+    
+    .banner-content {
+        font-size: 1.3rem;
+        letter-spacing: 0px;
+        transform: scaleX(1.0);
+    }
+    
+    .banner-content span * {
+        font-size: 1.5rem;
+    }
+    
+    /* Submissions section optimized for mobile */
+    .submissions {
+        padding: 30px 0;
+    }
+    
+    .submissions-container {
+        padding: 10px;
+        gap: 20px;
+        margin: 0;
+    }
+    
+    .submission-form {
+        padding: 15px;
+    }
+    
+    .poetry-textarea {
+        height: 220px;
+        font-size: 16px; /* Prevents iOS zoom */
+        padding: 15px;
+    }
+    
+    .instructions h3 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    
+    .contact-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .instructions li {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group input {
+        font-size: 16px; /* Prevents iOS zoom */
+        padding: 10px 12px;
+    }
+    
+    /* Donation section for mobile */
+    .donate {
+        padding: 30px 0;
+    }
+    
+    .donate-container {
+        padding: 0 15px;
+    }
+    
+    .donate-content {
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .donate-container h2 {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .donate-container > p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .donate-info h3,
+    .donate-form h3 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    .donate-form {
+        padding: 15px;
+    }
+    
+    .donation-options {
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .donation-amount {
+        min-width: 55px;
+        font-size: 0.85rem;
+        padding: 10px 15px;
+    }
+    
+    .donate-submit {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+    
+    /* Modal improvements for mobile */
+    .modal-content {
+        width: 95%;
+        padding: 25px 20px;
+        max-height: 85vh;
+    }
+    
+    .modal-title {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    .modal-essay {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 390px) {
+    /* iPhone 12 mini and smaller devices */
+    .quotes-button a {
+        width: calc(100vw - 15px);
+        max-width: 280px;
+        height: 42px;
+        font-size: 0.65rem;
+    }
+    
+    .submit-button a,
+    .donate-button a {
+        width: 85px;
+        font-size: 0.7rem;
+        padding: 5px 6px;
+    }
+    
+    .main-logo img {
+        width: 95vw;
+        max-width: 280px;
+    }
+    
+    .banner-content {
+        font-size: 1.1rem;
+    }
+    
+    .banner-content span * {
+        font-size: 1.3rem;
+    }
+}
+
+/* Handle vertical screen shrinking */
+@media (max-height: 700px) {
+    .quotes-button {
+        top: 15px;
+    }
+    
+    .main-logo {
+        top: 55%;
+    }
+    
+    .main-logo img {
+        max-width: 350px;
+    }
+}
+
+@media (max-height: 600px) {
+    .quotes-button {
+        top: 10px;
+    }
+    
+    .quotes-button a {
+        height: 45px;
+        font-size: 0.85rem;
+    }
+    
+    .main-logo {
+        top: 60%;
+    }
+    
+    .main-logo img {
+        max-width: 300px;
+    }
+}
+
+/* Landscape orientation for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .homepage {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+    
+    .main-logo {
+        top: 50%;
+    }
+    
+    .main-logo img {
+        width: 50vh;
+        max-width: 300px;
+    }
+    
+    .quotes-button {
+        top: 10px;
+    }
+    
+    .quotes-button a {
+        height: 35px;
+        font-size: 0.7rem;
+    }
+    
+    .project-credit,
+    .instagram-button {
+        bottom: 65px;
+    }
+} 
